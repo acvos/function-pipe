@@ -4,8 +4,6 @@ Functional composition for JS
 ## Motivation
 Javascript is a very powerful language. Why not make it even more powerful with a simple functional composition tool? Function pipe allows you to create functions by combining other functions, just like lego blocks.
 
-Poly-filter works equally well with both arrays and objects so you never have to write those annoying iterations again.
-
 ## Features
 - Converts a list of functions into a function
 - Supports array or multiple arguments syntax
