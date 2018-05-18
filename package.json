@@ -1,7 +1,14 @@
 {
   "name": "function-pipe",
   "description": "Functional composition for JS",
-  "keywords": "pipeline, functional programming, composition, pipe",
+  "keywords": [
+    "pipe",
+    "functional composition",
+    "pipe functions",
+    "promise",
+    "sync",
+    "async"
+  ],
   "version": "1.1.0",
   "scripts": {
     "test": "jest"
