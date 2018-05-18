@@ -3,17 +3,24 @@
   "description": "Functional composition for JS",
   "keywords": "pipeline, functional programming, composition, pipe",
   "version": "1.0.1",
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/acvos/function-pipe.git"
   },
   "author": "Anthony Chernikov <achernikov@acvos>",
   "dependencies": {
-    "array-flatten": "^2.1.0"
+    "array-flatten": "^2.1.0",
+    "expect.js": "^0.3.1"
   },
   "engines": {
     "node": ">=4.0",
     "npm": ">=2.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jest": "^22.4.4"
+  }
 }

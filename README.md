@@ -1,4 +1,5 @@
 # function-pipe
+[![Build Status](https://travis-ci.org/acvos/function-pipe.svg?branch=master)](https://travis-ci.org/acvos/function-pipe)
 Functional composition for JS
 
 ## Motivation
@@ -7,10 +8,9 @@ Javascript is a very powerful language. Why not make it even more powerful with 
 ## Features
 - Converts a list of functions into a function
 - Supports array or multiple arguments syntax
-- Supports nested arrays
-
-## Limitations
-- Only supports with single argument functions
+- Flattens nested arrays of functions
+- First function in the pipe can accept multiple arguments
+- Works with promises or any mixture of sync and async functions
 
 ## Installation
 
@@ -47,3 +47,23 @@ console.log(myStringTransformer2('wow such very much doge!'));
 console.log(myStringTransformer3('wow such very much doge!'));
 console.log(myStringTransformer4('wow such very much doge!'));
 console.log(myStringTransformer5('wow such very much doge!'));
+
+// Promise support: following work equally well
+Promise.resolve('wow such very much doge!').then(myStringTransformer1).then(console.log);
+myStringTransformer1(Promise.resolve('wow such very much doge!')).then(console.log);
+
+// Async functions support
+const asyncPipe = pipe(
+  fetchFrom('http://some.com/resource/:id'),
+  toJson(),
+  map(conutItems)
+)
+
+asyncPipe('doge').then(console.log)
+```
+
+## Testing
+
+```
+npm test
+```
