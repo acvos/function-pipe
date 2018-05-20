@@ -7,9 +7,10 @@ Javascript is a very powerful language. Why not make it even more powerful with 
 
 ## Features
 - Supports Promises or any mixture of sync and async functions
-- Supports array or multiple arguments syntax
-- Flattens nested arrays of functions
 - First function in the pipe can accept multiple arguments
+- Peturns a promise  when there is a promise in the pipe
+- Works synchronously when all the parts of the pipe are synchronous
+- Flattens nested arrays of functions
 
 ## Installation
 
@@ -20,38 +21,30 @@ npm install function-pipe
 ## Usage
 
 ```javascript
-var pipe = require('function-pipe');
+import pipe from 'function-pipe'
 
-function toUppercase(string) {
-  return string.toUpperCase();
-}
+const toUppercase = string => string.toUpperCase()
+const reverse = string => string.split('').reverse().join('')
+const splitInWords = string => string.split(' ')
 
-function reverse(string) {
-  return string.split('').reverse().join('');
-}
+// Simple use
+const pipe1 = pipe(toUppercase, reverse, splitInWords)
 
-function splitInWords(string) {
-  return string.split(' ');
-}
+console.log(pipe1('wow such very much doge!'))
+// -> [ '!EGOD', 'HCUM', 'YREV', 'HCUS', 'WOW' ]
 
-// All of these filters return [ '!EGOD', 'HCUM', 'YREV', 'HCUS', 'WOW' ]
-var pipe1 = pipe(toUppercase, reverse, splitInWords)
-var pipe2 = pipe([toUppercase, reverse, splitInWords])
-var pipe3 = pipe(toUppercase, [reverse, splitInWords])
-var pipe4 = pipe([toUppercase, reverse], splitInWords)
-var pipe5 = pipe(toUppercase, [reverse, [splitInWords]])
+pipe1(Promise.resolve('wow such very much doge!'))
+  .then(console.log)
+// -> [ '!EGOD', 'HCUM', 'YREV', 'HCUS', 'WOW' ]
 
-console.log(pipe1('wow such very much doge!'));
-console.log(pipe2('wow such very much doge!'));
-console.log(pipe3('wow such very much doge!'));
-console.log(pipe4('wow such very much doge!'));
-console.log(pipe5('wow such very much doge!'));
+// Multiple arguments
+const join = (separator, array) => array.join(separator)
 
-// Promise support: following work equally well
-Promise.resolve('wow such very much doge!').then(pipe1).then(console.log);
-pipe1(Promise.resolve('wow such very much doge!')).then(console.log);
+const pipe2 = pipe(join, toUppercase)
+console.log(pipe2('-', ['doge', 'wow']))
+// -> 'DOGE-WOW'
 
-// Async functions support
+// Async functions in the pipe
 const asyncPipe = pipe(
   fetchFrom('http://some.com/resource/:id'),
   toJson(),
@@ -59,6 +52,9 @@ const asyncPipe = pipe(
 )
 
 asyncPipe('doge').then(console.log)
+
+console.log(pipe5('wow such very much doge!'));
+
 ```
 
 ## Testing
