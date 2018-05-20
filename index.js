@@ -9,6 +9,10 @@ function apply(f, args) {
     return args[0]
   }
 
+  if (typeof f !== 'function') {
+    return f
+  }
+
   if (args.length === 1 && isPromise(args[0])) {
     return args[0].then(f)
   }
@@ -23,8 +27,9 @@ function apply(f, args) {
 }
 
 function pipe() {
-  var first = arguments[0]
-  var rest = flatten(Array.prototype.slice.call(arguments, 1))
+  var funcs = flatten(Array.prototype.slice.call(arguments, 0))
+  var first = funcs[0]
+  var rest = funcs.slice(1)
 
   return function () {
     var args = Array.prototype.slice.call(arguments, 0)

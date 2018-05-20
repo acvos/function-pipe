@@ -21,6 +21,11 @@ test('pipes synchronously through functions', function () {
 })
 
 test('pipes multiple arguments', function () {
+  const p = pipe('doge', upper, split, reverse)
+  expect(p('nothing')).to.eql(['E', 'G', 'O', 'D'])
+})
+
+test('pipes constants', function () {
   const p = pipe(concat, upper)
   expect(p('very', 'doge')).to.eql('VERYDOGE')
 })
