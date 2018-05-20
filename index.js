@@ -1,33 +1,16 @@
 var flatten = require('array-flatten')
+var apply = require('poly-apply')
 
-function isPromise(x) {
-  return (x instanceof Promise)
-}
-
-function apply(f, args) {
-  if (!f) {
-    return args[0]
-  }
-
-  if (typeof f !== 'function') {
-    return f
-  }
-
-  if (args.length === 1 && isPromise(args[0])) {
-    return args[0].then(f)
-  }
-
-  if (args.filter(isPromise).length > 0) {
-    return Promise.all(args).then(function (xs) {
-      return f.apply(undefined, xs)
-    })
-  }
-
-  return f.apply(undefined, args)
+function identity(x) {
+  return x
 }
 
 function pipe() {
   var funcs = flatten(Array.prototype.slice.call(arguments, 0))
+  if (!funcs.length) {
+    return identity
+  }
+
   var first = funcs[0]
   var rest = funcs.slice(1)
 

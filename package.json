@@ -19,7 +19,8 @@
   },
   "author": "Anthony Chernikov <achernikov@acvos>",
   "dependencies": {
-    "array-flatten": "^2.1.1"
+    "array-flatten": "^2.1.1",
+    "poly-apply": "^1.0.0"
   },
   "engines": {
     "node": ">=4.0",
@@ -27,7 +28,6 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "expect.js": "^0.3.1",
     "jest": "^22.4.4"
   }
 }
