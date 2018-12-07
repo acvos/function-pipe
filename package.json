@@ -19,7 +19,7 @@
   },
   "author": "Anthony Chernikov <achernikov@acvos>",
   "dependencies": {
-    "array-flatten": "^2.1.1",
+    "array-flatten": "^2.1.2",
     "poly-apply": "^1.0.0"
   },
   "engines": {
