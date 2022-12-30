@@ -29,6 +29,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "expect": "^24.9.0",
-    "mocha": "^6.2.0"
+    "mocha": "^10.2.0"
   }
 }
